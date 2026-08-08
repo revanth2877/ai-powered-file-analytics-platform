@@ -12,7 +12,6 @@ def login():
         username = request.form.get('username')
         password = request.form.get('password')
 
-        # Demo login
         if username == 'admin' and password == 'admin123':
             session['user'] = username
             return redirect(url_for('dashboard'))
@@ -36,19 +35,26 @@ def dashboard():
     )
 
 
-# ---------------- SEARCH PAGE ----------------
+# ---------------- SEARCH ----------------
 @app.route('/search')
 def search():
     if 'user' not in session:
         return redirect(url_for('login'))
-    return render_template('search.html')
+
+    files = ['report.txt', 'data.csv', 'notes.docx']
+    query = request.args.get('q', '')
+
+    results = [f for f in files if query.lower() in f.lower()] if query else []
+
+    return render_template('search.html', query=query, results=results)
 
 
-# ---------------- ANALYTICS PAGE ----------------
+# ---------------- ANALYTICS ----------------
 @app.route('/analytics')
 def analytics():
     if 'user' not in session:
         return redirect(url_for('login'))
+
     return render_template('analytics.html')
 
 
@@ -58,7 +64,7 @@ def assistant():
     if 'user' not in session:
         return redirect(url_for('login'))
 
-    answer = None
+    answer = ''
 
     if request.method == 'POST':
         question = request.form.get('question', '').lower()
@@ -102,5 +108,5 @@ def logout():
 
 # ---------------- RENDER DEPLOYMENT ----------------
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5001))
+    port = int(os.environ.get('PORT', 10000))
     app.run(host='0.0.0.0', port=port)
