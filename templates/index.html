@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>AI Smart File Analytics</title>
+    <link rel='stylesheet' href='{{ url_for("static", filename="css/style.css") }}'>
+</head>
+<body>
+
+<div class='container'>
+
+    <div style='text-align:right;margin-bottom:20px;'>
+        <a href='/logout' class='btn'>Logout</a>
+    </div>
+
+    <h1>AI Smart File Analytics & Management System</h1>
+    <p class='subtitle'>Secure Data Science & AI Dashboard</p>
+
+    <div class='cards'>
+
+        <div class='card'>
+            <h3>Total Files</h3>
+            <p>{{ stats.total_files }}</p>
+        </div>
+
+        <div class='card'>
+            <h3>Duplicate Files</h3>
+            <p>{{ stats.duplicates }}</p>
+        </div>
+
+        <div class='card'>
+            <h3>Storage Used</h3>
+            <p>{{ stats.storage }}</p>
+        </div>
+
+    </div>
+
+    <div class='ai-box'>
+        <h2>AI File Insights</h2>
+        <ul>
+            {% for item in insights %}
+            <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class='chart-box'>
+        <h2>File Category Visualization</h2>
+        <img src='{{ url_for("static", filename="chart.png") }}' width='500'>
+    </div>
+
+    <br><br>
+
+    <a href='/assistant' class='btn'>Open AI Assistant</a>
+
+    <a href='/search' class='btn'>Open File Search</a>
+
+    <a href='/download-report' class='btn'>Download CSV Report</a>
+
+    <a href='/analytics' class='btn'>Open Analytics Dashboard</a>
+
+</div>
+
+</body>
+</html>

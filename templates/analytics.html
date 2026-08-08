@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Analytics Dashboard</title>
+    <link rel='stylesheet' href='{{ url_for("static", filename="css/style.css") }}'>
+</head>
+<body>
+
+<div class='container'>
+
+    <h1>Advanced Analytics Dashboard</h1>
+    <p class='subtitle'>Data Science Insights</p>
+
+    <div class='cards'>
+
+        <div class='card'>
+            <h3>Total Files</h3>
+            <p>{{ stats.total_files }}</p>
+        </div>
+
+        <div class='card'>
+            <h3>Duplicate Files</h3>
+            <p>{{ stats.duplicates }}</p>
+        </div>
+
+        <div class='card'>
+            <h3>Storage Used</h3>
+            <p>{{ stats.storage }}</p>
+        </div>
+
+    </div>
+
+    <div class='chart-box'>
+        <h2>Category Distribution</h2>
+        <img src='{{ url_for("static", filename="chart.png") }}' width='550'>
+    </div>
+
+    <div class='ai-box'>
+        <h2>AI File Insights</h2>
+        <ul>
+            {% for item in insights %}
+            <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class='ai-box'>
+        <h2>Category Summary</h2>
+
+        <table style='width:100%;border-collapse:collapse;'>
+
+            <tr>
+                <th style='text-align:left;padding:8px;border-bottom:1px solid #ddd;'>Category</th>
+                <th style='text-align:left;padding:8px;border-bottom:1px solid #ddd;'>Count</th>
+            </tr>
+
+            {% for category, count in categories.items() %}
+            <tr>
+                <td style='padding:8px;border-bottom:1px solid #eee;'>{{ category }}</td>
+                <td style='padding:8px;border-bottom:1px solid #eee;'>{{ count }}</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+    <a href='/' class='btn'>Back to Main Dashboard</a>
+
+</div>
+
+</body>
+</html>

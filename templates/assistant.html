@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>AI Assistant</title>
+    <link rel='stylesheet' href='{{ url_for("static", filename="css/style.css") }}'>
+</head>
+<body>
+
+<div class='container'>
+
+    <h1>AI File Assistant</h1>
+    <p class='subtitle'>Ask questions about your file analytics</p>
+
+    <div class='ai-box' style='max-width:650px;text-align:center;'>
+
+        <form method='POST'>
+
+            <input type='text'
+                   name='question'
+                   placeholder='Ask something...'
+                   value='{{ question }}'
+                   required
+                   style='width:100%;padding:12px;border-radius:8px;border:1px solid #ccc;margin-bottom:20px;'>
+
+            <button type='submit'
+                    style='padding:12px 24px;background:#2563eb;color:white;border:none;border-radius:8px;font-weight:bold;'>
+                Ask AI
+            </button>
+
+        </form>
+
+        {% if answer %}
+
+        <div style='margin-top:25px;background:#f9fafb;padding:18px;border-radius:10px;text-align:left;'>
+            <h3>AI Response</h3>
+            <p>{{ answer }}</p>
+        </div>
+
+        {% endif %}
+
+    </div>
+
+    <br>
+
+    <a href='/' class='btn'>Back to Dashboard</a>
+
+</div>
+
+</body>
+</html>
